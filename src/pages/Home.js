@@ -1,14 +1,20 @@
-import { Button, ButtonGroup, Col, Row, Table } from "react-bootstrap";
-import { useLoaderData } from "react-router-dom";
+import { useEffect } from "react";
+import { Col, Row, Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import PostItem from "../components/PostItem";
+import { getPosts } from "../store/posts";
 
-export async function loader() {
-  const res = await fetch("http://localhost:5000/posts");
-  const posts = await res.json();
-  return { posts };
-}
 function Home() {
-  const { posts } = useLoaderData();
-  return (
+  // const { posts } = useLoaderData();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
+
+  const { posts, isLoading } = useSelector((store) => store.posts);
+  return isLoading ? (
+    "Loading..."
+  ) : (
     <Row>
       <Col xs={{ span: 8, offset: 2 }}>
         <Table striped bordered hover>
@@ -21,17 +27,8 @@ function Home() {
           </thead>
           <tbody>
             {posts &&
-              posts.map((post) => (
-                <tr>
-                  <td>{post.id}</td>
-                  <td>{post.title}</td>
-                  <td>
-                    <ButtonGroup aria-label="Basic example">
-                      <Button variant="success">Edit</Button>
-                      <Button variant="danger">Delete</Button>
-                    </ButtonGroup>
-                  </td>
-                </tr>
+              posts.map((post, idx) => (
+                <PostItem key={idx} post={post} idx={idx} />
               ))}
           </tbody>
         </Table>
