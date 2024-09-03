@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -6,12 +7,16 @@ const Header = () => {
       <h1>CRUD APP</h1>
       <ul className="nav">
         <li>
-          <a href="/">Home</a>
+          <NavLink end to="/">
+            Home
+          </NavLink>
         </li>
         <li>
-          <a href="/">Add Post</a>
+          <NavLink to="/post/add">Add Post</NavLink>
         </li>
-        <li className="login">login</li>
+        <NavLink className="login" to="login">
+          login
+        </NavLink>
       </ul>
     </div>
   );
