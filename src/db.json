@@ -1,54 +1,9 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Introduction to Redux",
       "content": "Redux is a predictable state container for JavaScript apps. It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test."
-    },
-    {
-      "id": 2,
-      "title": "Getting Started with React Router",
-      "content": "React Router is a powerful routing library for React applications. It allows you to define routes and navigate between different components based on the URL."
-    },
-    {
-      "id": 3,
-      "title": "CRUD Operations with Redux",
-      "content": "CRUD stands for Create, Read, Update, and Delete. With Redux, you can easily implement these operations to manage your application's data."
-    },
-    {
-      "id": 4,
-      "title": "Authentication and Authorization in Redux",
-      "content": "Implementing authentication and authorization in Redux can help secure your application by controlling access to certain features or resources based on user roles or permissions."
-    },
-    {
-      "id": 5,
-      "title": "Handling Form Data with Redux",
-      "content": "Redux provides a convenient way to manage form data in your application. You can store form values in the Redux store and easily access them from different components."
-    },
-    {
-      "id": 6,
-      "title": "Optimizing Performance with Redux",
-      "content": "Redux offers various techniques to optimize the performance of your application, such as memoization, selective rendering, and using middleware like Redux Thunk or Redux Saga."
-    },
-    {
-      "id": 7,
-      "title": "Testing Redux Applications",
-      "content": "Testing is an essential part of software development. With Redux, you can write unit tests to ensure that your application's state management logic is working correctly."
-    },
-    {
-      "id": 8,
-      "title": "Handling Side Effects with Redux Middleware",
-      "content": "Redux middleware allows you to handle side effects, such as making API calls or dispatching additional actions, in a controlled and predictable way."
-    },
-    {
-      "id": 9,
-      "title": "Using Redux DevTools for Debugging",
-      "content": "Redux DevTools is a browser extension that provides a powerful debugging experience for Redux applications. It allows you to inspect the state, track actions, and time travel through your application's state history."
-    },
-    {
-      "id": 10,
-      "title": "Deploying Redux Applications",
-      "content": "Once you have developed your Redux application, you need to deploy it to a production environment. There are various deployment strategies and hosting options available for Redux applications."
     }
   ]
 }
