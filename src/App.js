@@ -1,11 +1,14 @@
+import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import store from "./store/store";
+
 import AddPost from "./pages/AddPost";
 import AppLayout from "./pages/AppLayout";
 import EditPost from "./pages/EditPost";
 import ErrorPage from "./pages/ErrorPage";
-import Home, { loader as postsLoader } from "./pages/Home";
+import Home from "./pages/Home";
 
-import Details, { loader as detailsLoader } from "./pages/Details";
+import Details from "./pages/Details";
 
 const router = createBrowserRouter([
   {
@@ -16,8 +19,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: postsLoader,
-
+        // loader: postsLoader,
       },
       {
         path: "/post",
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
       {
         path: "/post/:id",
         element: <Details />,
-        loader: detailsLoader,
+        // loader: detailsLoader,
       },
       {
         path: "/post/edit",
@@ -41,7 +43,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return (
+    <Provider store={store}>
+      <RouterProvider router={router}></RouterProvider>
+    </Provider>
+  );
 }
 
 export default App;
