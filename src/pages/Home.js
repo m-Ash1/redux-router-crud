@@ -1,17 +1,47 @@
-import { useEffect } from "react";
 import { Col, Row, Table } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { redirect, useLoaderData } from "react-router-dom";
 import PostItem from "../components/PostItem";
-import { getPosts } from "../store/posts";
+
+export async function action({ params }) {
+  try {
+    // Make an API call to delete the post with the given id
+    const response = await fetch(`http://localhost:5000/posts/${params.id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      // Post deleted successfully
+      console.log("Post deleted successfully");
+    } else {
+      // Handle error response
+      console.error("Failed to delete post");
+    }
+  } catch (error) {
+    // Handle network or other errors
+    console.error("An error occurred while deleting the post", error);
+  }
+  return redirect("/");
+}
+
+export async function loader() {
+  try {
+    const response = await fetch("http://localhost:5000/posts");
+    const posts = await response.json();
+    return posts;
+  } catch (error) {
+    console.error("An error occurred while fetching posts", error);
+  }
+}
 
 function Home() {
-  // const { posts } = useLoaderData();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
+  const posts = useLoaderData();
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getPosts());
+  // }, [dispatch]);
 
-  const { posts, isLoading } = useSelector((store) => store.posts);
+  const { isLoading } = useSelector((store) => store.posts);
   return isLoading ? (
     "Loading..."
   ) : (

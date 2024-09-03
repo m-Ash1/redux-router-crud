@@ -6,9 +6,10 @@ import AddPost from "./pages/AddPost";
 import AppLayout from "./pages/AppLayout";
 import EditPost from "./pages/EditPost";
 import ErrorPage from "./pages/ErrorPage";
-import Home from "./pages/Home";
+import Home, { loader as postsLoader } from "./pages/Home";
 
 import Details from "./pages/Details";
+import { action as postDeleteAction } from "./pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -19,15 +20,20 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        // loader: postsLoader,
+        loader: postsLoader,
       },
       {
         path: "/post",
         element: <Home />,
+        loader: postsLoader,
       },
       {
         path: "/post/add",
         element: <AddPost />,
+      },
+      {
+        path: "/post/delete/:id",
+        action: postDeleteAction,
       },
       {
         path: "/post/:id",
