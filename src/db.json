@@ -19,26 +19,6 @@
       "id": "4",
       "title": "Authentication and Authorization in Redux",
       "content": "Implementing authentication and authorization in Redux can help secure your application by controlling access to certain features or resources based on user roles or permissions."
-    },
-    {
-      "id": "5",
-      "title": "Handling Form Data with Redux",
-      "content": "Redux provides a convenient way to manage form data in your application. You can store form values in the Redux store and easily access them from different components."
-    },
-    {
-      "id": "0f84",
-      "title": "ash",
-      "content": "1"
-    },
-    {
-      "id": "11aa",
-      "title": "ash",
-      "content": "123"
-    },
-    {
-      "id": "439d",
-      "title": "1",
-      "content": "1"
     }
   ]
 }

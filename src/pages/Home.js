@@ -1,22 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import { Col, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { redirect, useLoaderData } from "react-router-dom";
 import PostItem from "../components/PostItem";
 
-export async function action({ params }) {
-  try {
-    // Make an API call to delete the post with the given id
-    await fetch(`http://localhost:5000/posts/${params.id}`, {
-      method: "DELETE",
-    });
-  } catch (error) {
-    // Handle network or other errors
-    console.error("An error occurred while deleting the post", error);
-  }
-  return redirect("/");
-}
-
-export async function loader() {
+async function getPosts() {
   try {
     const response = await fetch("http://localhost:5000/posts");
     const posts = await response.json();
@@ -27,7 +14,11 @@ export async function loader() {
 }
 
 function Home() {
-  const posts = useLoaderData();
+  const { data } = useQuery({
+    queryKey: ["posts"],
+    queryFn: getPosts,
+  });
+
   // const dispatch = useDispatch();
   // useEffect(() => {
   //   dispatch(getPosts());
@@ -48,8 +39,8 @@ function Home() {
             </tr>
           </thead>
           <tbody>
-            {posts &&
-              posts.map((post, idx) => (
+            {data &&
+              data?.map((post, idx) => (
                 <PostItem key={idx} post={post} idx={idx} />
               ))}
           </tbody>
