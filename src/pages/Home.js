@@ -6,17 +6,9 @@ import PostItem from "../components/PostItem";
 export async function action({ params }) {
   try {
     // Make an API call to delete the post with the given id
-    const response = await fetch(`http://localhost:5000/posts/${params.id}`, {
+    await fetch(`http://localhost:5000/posts/${params.id}`, {
       method: "DELETE",
     });
-
-    if (response.ok) {
-      // Post deleted successfully
-      console.log("Post deleted successfully");
-    } else {
-      // Handle error response
-      console.error("Failed to delete post");
-    }
   } catch (error) {
     // Handle network or other errors
     console.error("An error occurred while deleting the post", error);

@@ -2,9 +2,9 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import store from "./store/store";
 
-import AddPost from "./pages/AddPost";
+import AddPost, { action as addPostAction } from "./pages/AddPost";
 import AppLayout from "./pages/AppLayout";
-import EditPost from "./pages/EditPost";
+import EditPost, { action as editPostAction } from "./pages/EditPost";
 import ErrorPage from "./pages/ErrorPage";
 import Home, { loader as postsLoader } from "./pages/Home";
 
@@ -23,14 +23,16 @@ const router = createBrowserRouter([
         loader: postsLoader,
       },
       {
-        path: "/post",
+        path: "/posts",
         element: <Home />,
         loader: postsLoader,
       },
       {
         path: "/post/add",
         element: <AddPost />,
+        action: addPostAction,
       },
+
       {
         path: "/post/delete/:id",
         action: postDeleteAction,
@@ -41,8 +43,9 @@ const router = createBrowserRouter([
         // loader: detailsLoader,
       },
       {
-        path: "/post/edit",
+        path: "/post/:id/edit",
         element: <EditPost />,
+        action: editPostAction,
       },
     ],
   },

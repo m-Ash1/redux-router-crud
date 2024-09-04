@@ -11,7 +11,12 @@ function PostItem({ post, idx }) {
       </td>
       <td className="flex align-content-center">
         <ButtonGroup aria-label="Basic example">
-          <Button variant="success">Edit</Button>
+          <Form method="post" action={`post/${post.id}/edit`}>
+            <input type="hidden" name="post" value={JSON.stringify(post)} />
+            <Button variant="primary" type="submit">
+              Edit
+            </Button>
+          </Form>
           <Form
             method="post"
             action={`/post/delete/${post.id}`}
