@@ -6,10 +6,11 @@ import AddPost from "./pages/AddPost";
 import AppLayout from "./pages/AppLayout";
 import EditPost from "./pages/EditPost";
 import ErrorPage from "./pages/ErrorPage";
-import Home, { loader as postsLoader } from "./pages/Home";
+import Home from "./pages/Home";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Details from "./pages/Details";
-import { action as postDeleteAction } from "./pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -20,39 +21,40 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: postsLoader,
       },
       {
-        path: "/post",
+        path: "/posts",
         element: <Home />,
-        loader: postsLoader,
       },
       {
         path: "/post/add",
         element: <AddPost />,
       },
+
       {
         path: "/post/delete/:id",
-        action: postDeleteAction,
       },
       {
         path: "/post/:id",
         element: <Details />,
-        // loader: detailsLoader,
       },
       {
-        path: "/post/edit",
+        path: "/post/:id/edit",
         element: <EditPost />,
       },
     ],
   },
 ]);
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <Provider store={store}>
-      <RouterProvider router={router}></RouterProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <RouterProvider router={router}></RouterProvider>
+      </Provider>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }
 

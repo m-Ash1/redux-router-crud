@@ -1,7 +1,28 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button, ButtonGroup } from "react-bootstrap";
-import { Form } from "react-router-dom";
+import { Form, redirect } from "react-router-dom";
+
+async function deletePost(postId) {
+  try {
+    await fetch(`http://localhost:5000/posts/${postId}`, {
+      method: "DELETE",
+    });
+  } catch (error) {
+    // Handle network or other errors
+    console.error("An error occurred while deleting the post", error);
+  }
+  return redirect("/");
+}
 
 function PostItem({ post, idx }) {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: deletePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries("posts");
+    },
+  });
+
   return (
     <tr>
       <td>{++idx}</td>
@@ -11,16 +32,15 @@ function PostItem({ post, idx }) {
       </td>
       <td className="flex align-content-center">
         <ButtonGroup aria-label="Basic example">
-          <Button variant="success">Edit</Button>
-          <Form
-            method="post"
-            action={`/post/delete/${post.id}`}
-            style={{ margin: 0 }}
-          >
-            <Button variant="danger" type="submit">
-              Delete
+          <Form method="post" action={`post/${post.id}/edit`}>
+            <input type="hidden" name="post" value={JSON.stringify(post)} />
+            <Button variant="primary" type="submit">
+              Edit
             </Button>
           </Form>
+          <Button variant="danger" onClick={() => mutate(post.id)}>
+            Delete
+          </Button>
         </ButtonGroup>
       </td>
     </tr>
